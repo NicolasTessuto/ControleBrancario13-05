@@ -25,18 +25,21 @@ public class Agencia {
         }
         return retorno;
     }
-
     public void saqueEmConta(int auxNumConta, double auxValor) {
         for (Conta c : listaDeContas){
             if (tipoDeConta(auxNumConta)) {
-                c.setSaldo(c.getSaldo() - auxValor);
+                if(auxValor <= 0||auxValor > c.getSaldo()) {
+                    System.out.println("VALOR INVALIDO");
+                }
+                else {
+                    c.setSaldo(c.getSaldo() - auxValor);
+                }
             }
             else{
                 System.out.println("ESSA CONTA É POUPANCA, NAO PERMITE SAQUES");
             }
         }
     }
-
     public void exibeContasCadastradas() {
         if (listaDeContas.isEmpty()) {
             System.out.println("Lista de contas esta vazia...");
@@ -81,7 +84,12 @@ public class Agencia {
         if (verificaContaNaLista(contaDigitada)) {
             for (Conta c : listaDeContas) {
                 if (c.getnConta() == contaDigitada) {
-                    c.setSaldo(c.getSaldo() + auxValor);
+                    if(auxValor <= 0) {
+                        System.out.println("VALOR INVALIDO");
+                    }
+                    else {
+                        c.setSaldo(c.getSaldo() + auxValor);
+                    }
                 }
             }
         } else {
